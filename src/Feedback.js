@@ -9,22 +9,45 @@ class Feedback extends Component {
 
   constructor(props){
     super(props);
-    this.state = {showButton:true};
+    this.state = {showButton:true, showForm:false};
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleButtonClick(){
     const {handleButtonClick} = this.props;
-    this.setState({showButton: !this.state.showButton});
+    this.setState({showButton: false, showForm:true});
     handleButtonClick();
+  }
+  handleSubmit(){
+    const {handleButtonClick} = this.props;
+    if(showButtonAgain){
+      this.setState({showButton:true});
+    }
+    this.setState({showForm:false});
+    handleButtonClick();
+  }
+  handleClose(){
+    const {handleSubmit, showButtonAgain} = this.props;
+    if(showButtonAgain){
+      this.setState({showButton:true});
+    }
+    this.setState({showForm:false});
+    handleSubmit();
   }
 
   render(){
+    const {headerText} = this.props;
     return(
       <div>
-        <Header />
-        <Body />
-        <Footer />
+        {this.state.showForm &&
+          <div>
+            <Header headerText={headerText} handleClose={this.handleClose}/>
+            <Body />
+            <Footer handleSubmit={this.handleSubmit}/>
+          </div>
+        }
         {this.state.showButton &&
           <Button handleButtonClick={this.handleButtonClick}/>
         }
@@ -38,9 +61,10 @@ Feedback.propTypes = {
   headerText: React.PropTypes.string,
   bodyText: React.PropTypes.string,
   position: React.PropTypes.string,
-  onClose: React.PropTypes.func,
-  onSubmit: React.PropTypes.func,
+  handleClose: React.PropTypes.func,
+  handleSubmit: React.PropTypes.func,
   handleButtonClick: React.PropTypes.func,
+  showButtonAgain: React.PropTypes.bool
 }
 
 Feedback.defaultProps = {
@@ -48,9 +72,10 @@ Feedback.defaultProps = {
   headerText: 'Feedback',
   bodyText: 'Please enter your feedback here',
   position: 'right',
-  onClose: () => {},
-  onSubmit: () => {},
-  handleButtonClick: () => {}
+  handleClose: () => {},
+  handleSubmit: () => {},
+  handleButtonClick: () => {},
+  showButtonAgain: true
 }
 
 export default Feedback;
