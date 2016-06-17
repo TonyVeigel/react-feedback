@@ -4,16 +4,13 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/"
+    "url": "https://github.com/TonyVeigel/react-feedback.git"
   },
-  "scripts": {
-
-  },
+  "scripts": {},
   "dependencies": {
-
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
   },
-  "devDependencies": {
-
-  },
-  "license": "UNLICENSED"
+  "devDependencies": {},
+  "license": "MIT"
 }
