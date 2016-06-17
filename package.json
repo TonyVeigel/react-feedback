@@ -1,0 +1,19 @@
+{
+  "name": "react-feedback",
+  "description": "feedback form",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/"
+  },
+  "scripts": {
+
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+  },
+  "license": "UNLICENSED"
+}
