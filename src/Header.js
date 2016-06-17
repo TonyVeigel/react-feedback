@@ -1,24 +1,42 @@
 import React from 'react';
 
-const styles = {
-  position:'absolute',
+const defaultButtonStyles = {
+   position:'absolute',
    fontSize:'20px',
-   top:'16px',
-   right:'18px',
+   right:'15px',
    float:'right',
-   color: '#000',
+   color: '#ffffff',
    background: 'none',
-   color: '#ff0000',
    border: 0,
-   fontWeight: 'bold',
-   lineHeight: 2
+   fontWeight: 'bold'
  }
 
-const Header = ({headerText,handleClose}) => (
-  <div>
+const defaultHeaderStyles = {
+  height: '40px',
+  background: '#34495e',
+  marginBottom: '-1px',
+  color: '#ffffff',
+  fontSize: '18px',
+  fontWeight: '200',
+  lineHeight: '40px',
+  paddingLeft: '10px',
+  overflow: 'hidden',
+  borderRadius: '3px 3px 0px 0px'
+}
+
+const Header = ({headerText, headerBtnText, handleClose, headerStyles, headerBtnStyles}) => (
+  <div style={headerStyles}>
     {headerText}
-    <button onClick={handleClose} style={styles} type='button'>x</button>
+    <button onClick={handleClose} style={headerBtnStyles} type='button'>{headerBtnText}</button>
   </div>
 )
+
+Header.defaultProps = {
+  headerText: 'Feedback',
+  headerBtnText: 'x',
+  handleClose: () => {},
+  headerBtnStyles: defaultButtonStyles,
+  headerStyles: defaultHeaderStyles
+}
 
 export default Header;

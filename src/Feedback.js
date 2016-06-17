@@ -1,9 +1,7 @@
 import React, {PropTypes,Component} from 'react';
 import ReactDOM from 'react-dom';
-import Header from './Header';
-import Footer from './Footer';
-import Body from './Body';
 import Button from './Button';
+import Form from './Form';
 
 class Feedback extends Component {
 
@@ -20,36 +18,56 @@ class Feedback extends Component {
     this.setState({showButton: false, showForm:true});
     handleButtonClick();
   }
-  handleSubmit(){
+  handleSubmit(data, showButtonOnSubmit){
     const {handleButtonClick} = this.props;
-    if(showButtonAgain){
+    if(showButtonOnSubmit){
       this.setState({showButton:true});
     }
     this.setState({showForm:false});
-    handleButtonClick();
+    handleSubmit(data);
+    handleClose();
   }
   handleClose(){
-    const {handleSubmit, showButtonAgain} = this.props;
-    if(showButtonAgain){
+    const {handleClose, showButtonOnClose} = this.props;
+    if(showButtonOnClose){
       this.setState({showButton:true});
     }
     this.setState({showForm:false});
-    handleSubmit();
+    handleClose();
   }
 
   render(){
-    const {headerText} = this.props;
+    const {
+      headerText,
+      buttonText,
+      buttonStyles,
+      headerStyles,
+      headerBtnStyles,
+      headerBtnText,
+      bodyText
+    } = this.props;
+
     return(
       <div>
         {this.state.showForm &&
           <div>
-            <Header headerText={headerText} handleClose={this.handleClose}/>
-            <Body />
-            <Footer handleSubmit={this.handleSubmit}/>
+            <Form
+              headerText={headerText}
+              headerStyles={headerStyles}
+              headerBtnStyles={headerBtnStyles}
+              headerBtnText={headerBtnText}
+              handleClose={this.handleClose}
+              handleSubmit={this.handleSubmit}
+              bodyText={bodyText}
+              />
           </div>
         }
         {this.state.showButton &&
-          <Button handleButtonClick={this.handleButtonClick}/>
+          <Button
+            styles={buttonStyles}
+            text={buttonText}
+            handleButtonClick={this.handleButtonClick}
+            />
         }
       </div>
     )
@@ -64,18 +82,25 @@ Feedback.propTypes = {
   handleClose: React.PropTypes.func,
   handleSubmit: React.PropTypes.func,
   handleButtonClick: React.PropTypes.func,
-  showButtonAgain: React.PropTypes.bool
+  showButtonOnClose: React.PropTypes.bool,
+  showButtonOnSubmit: React.PropTypes.bool,
+  buttonStyles: React.PropTypes.object,
+  headerStyles: React.PropTypes.object,
+  headerBtnStyles: React.PropTypes.object,
+  bodyStyles: React.PropTypes.object,
+  footerStyles: React.PropTypes.object,
+  buttonText: React.PropTypes.string,
+  headerBtnText: React.PropTypes.string
 }
 
 Feedback.defaultProps = {
   showEmailInput: true,
-  headerText: 'Feedback',
-  bodyText: 'Please enter your feedback here',
   position: 'right',
-  handleClose: () => {},
   handleSubmit: () => {},
+  handleClose: () => {},
   handleButtonClick: () => {},
-  showButtonAgain: true
+  showButtonOnClose: true,
+  showButtonOnSubmit: true
 }
 
 export default Feedback;

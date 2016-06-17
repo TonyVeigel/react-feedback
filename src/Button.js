@@ -1,5 +1,16 @@
 import React,{PropTypes, Component} from 'react';
 
+const defaultButtonStyles = {
+  fontSize:'15px',
+  padding:'10px 15px',
+  position:'fixed',
+  right:'5%',
+  borderRadius:'5px 5px 0 0',
+  bottom:0,
+  backgroundColor:'#000000',
+  color: '#ffffff',
+  width: 'auto'
+}
 
 class Button extends Component {
 
@@ -23,14 +34,15 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-  handleOnClick: React.PropTypes.func,
+  handleButtonClick: React.PropTypes.func,
   styles: React.PropTypes.object,
   text: React.PropTypes.string
 }
 
 Button.defaultProps = {
-  styles: {fontSize:'15px', padding:'10px 15px', position:'fixed', right:'5%', borderRadius:'5px 5px 0 0', bottom:0, backgroundColor:'#000000', color: '#ffffff'},
-  text: 'Feedback'
+  styles: defaultButtonStyles,
+  text: 'Feedback',
+  handleButtonClick: () => {}
 }
 
 
