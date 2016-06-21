@@ -12,16 +12,15 @@ const defaultButtonStyles = {
  }
 
 const defaultHeaderStyles = {
-  height: '40px',
-  background: '#34495e',
-  marginBottom: '-1px',
-  color: '#ffffff',
-  fontSize: '18px',
-  fontWeight: '200',
   lineHeight: '40px',
-  paddingLeft: '10px',
-  overflow: 'hidden',
-  borderRadius: '3px 3px 0px 0px'
+  paddingLeft: '15px',
+  height: '40px',
+  borderRadius: '6px 6px 0 0',
+  backgroundColor: '#34495e',
+  color: '#FFFFFF',
+  fontSize: '18px',
+  fontWeight: '500',
+  overflow: 'hidden'
 }
 
 const Header = ({headerText, headerBtnText, handleClose, headerStyles, headerBtnStyles}) => (
@@ -34,7 +33,6 @@ const Header = ({headerText, headerBtnText, handleClose, headerStyles, headerBtn
 Header.defaultProps = {
   headerText: 'Feedback',
   headerBtnText: 'x',
-  handleClose: () => {},
   headerBtnStyles: defaultButtonStyles,
   headerStyles: defaultHeaderStyles
 }

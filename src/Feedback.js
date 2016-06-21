@@ -7,24 +7,51 @@ class Feedback extends Component {
 
   constructor(props){
     super(props);
-    this.state = {showButton:true, showForm:false};
+    this.state = {
+      showButton:true,
+      showForm:false,
+      showModal: false,
+      messageInput:'',
+      emailInput:'',
+      ratingInput:''
+    };
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleMessageInput = this.handleMessageInput.bind(this);
   }
-
+  handleMessageInput(inputName, content){
+    if(inputName === 'email'){
+      this.setState({emailInput:content});
+    }else if(inputName === 'rating'){
+      this.setState({ratingInput:content});
+    }
+    else if(inputName === 'message'){
+      this.setState({messageInput:content});
+    }
+  }
+  handleRatingInput(ratingInput){
+    this.setState({ratingInput:ratingInput});
+  }
+  handleEmailInput(emailInput){
+    this.setState({emailInput:emailInput});
+  }
   handleButtonClick(){
     const {handleButtonClick} = this.props;
     this.setState({showButton: false, showForm:true});
     handleButtonClick();
   }
-  handleSubmit(data, showButtonOnSubmit){
-    const {handleButtonClick} = this.props;
+  handleSubmit(){
+    const {showButtonOnSubmit, handleSubmit, handleClose} = this.props;
+    handleSubmit({
+        message: this.state.messageInput,
+        rating: this.state.ratingInput,
+        email: this.state.emailInput
+    });
     if(showButtonOnSubmit){
       this.setState({showButton:true});
     }
-    this.setState({showForm:false});
-    handleSubmit(data);
+    this.setState({showForm:false, messageInput:'', ratingInput:'', emailInput:''});
     handleClose();
   }
   handleClose(){
@@ -44,7 +71,10 @@ class Feedback extends Component {
       headerStyles,
       headerBtnStyles,
       headerBtnText,
-      bodyText
+      bodyText,
+      showEmailInput,
+      showRatingInput,
+      showMessageInput
     } = this.props;
 
     return(
@@ -59,6 +89,13 @@ class Feedback extends Component {
               handleClose={this.handleClose}
               handleSubmit={this.handleSubmit}
               bodyText={bodyText}
+              showEmailInput={showEmailInput}
+              showRatingInput={showRatingInput}
+              showMessageInput={showMessageInput}
+              emailInput={this.state.emailInput}
+              ratingInput={this.state.ratingInput}
+              messageInput={this.state.messageInput}
+              handleMessageInput={this.handleMessageInput}
               />
           </div>
         }
@@ -90,17 +127,20 @@ Feedback.propTypes = {
   bodyStyles: React.PropTypes.object,
   footerStyles: React.PropTypes.object,
   buttonText: React.PropTypes.string,
-  headerBtnText: React.PropTypes.string
+  headerBtnText: React.PropTypes.string,
+  showEmailInput: React.PropTypes.bool,
+  showRatingInput: React.PropTypes.bool,
+  showMessageInput: React.PropTypes.bool
 }
 
 Feedback.defaultProps = {
-  showEmailInput: true,
   position: 'right',
   handleSubmit: () => {},
   handleClose: () => {},
   handleButtonClick: () => {},
   showButtonOnClose: true,
-  showButtonOnSubmit: true
+  showButtonOnSubmit: true,
+  modal: false
 }
 
 export default Feedback;

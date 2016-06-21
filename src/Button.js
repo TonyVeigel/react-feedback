@@ -6,8 +6,9 @@ const defaultButtonStyles = {
   position:'fixed',
   right:'5%',
   borderRadius:'5px 5px 0 0',
+  border: 'none',
   bottom:0,
-  backgroundColor:'#000000',
+  backgroundColor:'#34495e',
   color: '#ffffff',
   width: 'auto'
 }
